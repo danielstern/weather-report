@@ -2,6 +2,65 @@ import { useEffect, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import './App.css'
 import axios, * as others from 'axios'
+import {Chart as ChartJS} from 'chart.js/auto'
+import {
+  // Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+} from 'chart.js';
+import { Line } from 'react-chartjs-2';
+// import { faker } from '@faker-js/faker';
+// import faker from 'faker'
+
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend
+);
+
+export const options = {
+  responsive: true,
+  plugins: {
+    legend: {
+      position: 'top',
+    },
+    title: {
+      display: true,
+      text: 'Chart.js Line Chart',
+    },
+  },
+};
+
+
+const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+
+export const data = {
+  labels,
+  datasets: [
+    {
+      label: 'Dataset 1',
+      data: [1,2,3,4,5,6,7,8,9,10,11,12],
+      borderColor: 'rgb(255, 99, 132)',
+      backgroundColor: 'rgba(255, 99, 132, 0.5)',
+    },
+    {
+      label: 'Dataset 2',
+      data: [1,2,3,4,5,6,7,8,9,10,11,12],
+      borderColor: 'rgb(53, 162, 235)',
+      backgroundColor: 'rgba(53, 162, 235, 0.5)',
+    },
+  ],
+};
 
 
 import cities from '../lib/cities.json' 
@@ -15,7 +74,8 @@ import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { adaptV4Theme, MenuItem, Select, TextField } from '@mui/material';
-import LocationPicker from 'react-location-picker';
+// import LocationPicker from 'react-location-picker';
+import { BarChart } from './Charts/Bar'
 
 const defaultPosition = {
   lat: 27.9878,
@@ -36,9 +96,8 @@ function App() {
 
   useEffect(() => {
     (async function () {
-      const payload = await fetchMeteomaticsData({ from, to, long, lat })
-      // console.info(data)
-      setData(payload)
+      const { data } = await fetchMeteomaticsData({ from, to, long, lat })
+      setData(data)
     })()
   }, [from, to, long, lat])
   console.info(data)
@@ -61,7 +120,7 @@ function App() {
             onChange={(d) =>console.info(d)} /> */}
         </div>
         <div>
-          <Select defaultValue={cities[0]} onChange={({longitude, latitude})=>{
+          <Select defaultValue={cities[0]} autoWidth={false} onChange={({longitude, latitude})=>{
             setLong(longitude)
             setLat(latitude)
           }}>
@@ -92,6 +151,10 @@ function App() {
           />
           {/* <input type="date"  /> */}
         </div>
+        {/* <div>
+          <BarChart data={[1,2,3,4]}/>
+        </div> */}
+        {/* <Line options={options} data={data} /> */}
         {/* <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
