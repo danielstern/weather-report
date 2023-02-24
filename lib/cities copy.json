@@ -1,0 +1,32 @@
+[
+  {
+    "name": "New York",
+    "latitude": 40.7127281,
+    "longitude": -74.0060152
+  },
+  {
+    "name": "Delhi",
+    "latitude": 28.6517178,
+    "longitude": 77.2219388
+  },
+  {
+    "name": "Mumbai",
+    "latitude": 18.9387711,
+    "longitude": 72.8353355
+  },
+  {
+    "name": "Moscow",
+    "latitude": 55.7504461,
+    "longitude": 37.6174943
+  },
+  {
+    "name": "Lagos",
+    "latitude": 6.4550575,
+    "longitude": 3.3941795
+  },
+  {
+    "name": "Kolkata",
+    "latitude": 22.5677459,
+    "longitude": 88.3476023
+  }
+]

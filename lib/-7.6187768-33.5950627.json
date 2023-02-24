@@ -1,0 +1,47 @@
+[
+  {
+    "parameter": "t_2m:C",
+    "coordinates": [
+      {
+        "lat": -7.618777,
+        "lon": 33.595063,
+        "dates": [
+          {
+            "date": "2023-02-23T00:00:00Z",
+            "value": 16.7
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "parameter": "wind_speed_10m:ms",
+    "coordinates": [
+      {
+        "lat": -7.618777,
+        "lon": 33.595063,
+        "dates": [
+          {
+            "date": "2023-02-23T00:00:00Z",
+            "value": 3.6
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "parameter": "precip_1h:mm",
+    "coordinates": [
+      {
+        "lat": -7.618777,
+        "lon": 33.595063,
+        "dates": [
+          {
+            "date": "2023-02-23T00:00:00Z",
+            "value": 0
+          }
+        ]
+      }
+    ]
+  }
+]

@@ -2,16 +2,12 @@ import * as env from 'dotenv'
 import axios, * as others from 'axios'
 import express from 'express'
 import cors from 'cors'
-// import spec from './spec.json' assert { type : 'json' }
+import { writeFileSync } from 'fs'
 env.config()
-// import spec from '../src/spec.jsx'
-
-// spec mode doesn't call the real API saving precious $$$s
-const specMode = true
 
 const auth = {
-  username: process.env.METEOMATICS_USER,
-  password: process.env.METEOMATICS_PASS
+  username: process.env.METEOMATICS_USER || "icpllc_stern",
+  password: process.env.METEOMATICS_PASS || "S9N8y9dN6m"
 }
 
 // METEOMATICS_USER=icpllc_stern
@@ -35,29 +31,32 @@ async function fetchMeteomaticsData({
 }) {
   if (specMode) return spec
   try {
-
-    const query = `https://api.meteomatics.com/${from}--${to}:PT1M/t_2m:C,wind_speed_10m:ms,precip_1h:mm/${long},${lat}/json`
+    const query = `https://api.meteomatics.com/${from}--${to}:PT1H/t_2m:C,wind_speed_10m:ms,precip_1h:mm/${long},${lat}/json`
+    console.table({query})
     const response = await axios.get(query, {auth})
     const payload = response.data.data
-    // console.info(JSON.stringify(payload,null,2))
     return payload
 
   } catch (e) {
-    console.info("Couldn't contact meteomatics. Returning spec data.", e.message)
-    return {}
+    console.info("Couldn't contact meteomatics. Returning spec data.", e)
+    throw new Error()
   }
 }
-
-// fetchMeteomaticsData({})
 
 const app = new express()
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 app.use(cors())
 app.post('/', async (req,res) => {
-  const { from, to, long, lat } = req.body
-  const data =  await fetchMeteomaticsData(req.body)
-  res.json(data)
+  try {
+    const data =  await fetchMeteomaticsData(req.body)
+    writeFileSync(`lib/${req.body.long}-${req.body.lat}.json`, JSON.stringify(data, null, 2))
+    res.json(data)
+
+  } catch (e) {
+    console.log(e)
+    res.sendStatus(500)
+  }
 })
 
 app.listen(process.env.PORT || 7777, console.info(`Weather report backend is listening`))
