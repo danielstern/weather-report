@@ -1,130 +1,24 @@
 import { useEffect, useState } from 'react'
-import axios, * as others from 'axios'
-import * as d3 from 'd3'
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { MenuItem, Select, TextField } from '@mui/material';
-import Typography from '@mui/material/Typography';
 import spec from './spec'
-import Box from '@mui/material/Box';
-import './App.css'
-import '@fontsource/roboto/300.css'
 import moment from 'moment'
+import Box from '@mui/material/Box';
 import WbSunnyIcon from '@mui/icons-material/WbSunny';
 import BeachAccessIcon from '@mui/icons-material/BeachAccess';
-import WindPowerIcon from '@mui/icons-material/WindPower';
-
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
+import { TabPanel } from './mui/TabPanel'
+import { TemperatureBarChart, PrecipitationChart } from './Charts'
+import { fetchMeteomaticsData } from './network';
 
 
-function TabPanel(props) {
-  const { children, value, index, ...other } = props;
+import cities from '../lib/cities copy.json'
+import './App.css'
+import '@fontsource/roboto/300.css'
 
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
-    </div>
-  );
-}
-
-
-const fetchMeteomaticsData = async (options) => await axios.post(`https://meteorics-api-wrapper.herokuapp.com/`, options)
-
-const PrecipitationChart = ({
-  precipitation,
-  minPrecipitation = -20,
-  maxPrecipitation = 100,
-  elementWidth = 1200,
-  elementHeight = 600,
-  l: length = precipitation.length,
-  marginTop = 36,
-  fontSize = 24,
-  margin = 36
-}) => {
-
-  const scale = d3.scaleLinear()
-    .domain([minPrecipitation, maxPrecipitation])
-    .range([0, elementHeight])
-
-    return <svg width="100%" viewBox={`0 0 ${elementWidth} ${elementHeight}`}>
-    <g>
-      <rect stroke='#32393F' width={elementWidth - margin * 2} height={elementHeight - marginTop * 2} fill="none"  y={marginTop} x={margin}/>
-      {precipitation.map((t, i) => (
-        <circle
-          key={i}
-          r={12}
-          cx={margin + 24 + (elementWidth - margin * 2) / (length / i)}
-          cy={marginTop + elementHeight - scale(t)}
-          fill="steelblue"
-          stroke="indigo" />
-      ))}
-    </g>
-   
-  </svg>
-
-}
-const TemperatureBarChart = ({
-  temperature,
-  minTemp = -40,
-  maxTemp = 50,
-  elementWidth = 1200,
-  elementHeight = 600,
-  l: length = temperature.length,
-  barWidth = 1000 / length - 0,
-  marginTop = 36,
-  fontSize = 24,
-  margin = 36
-}) => {
-
-  const scale = d3.scaleLinear()
-    .domain([minTemp, maxTemp])
-    .range([0, elementHeight])
-
-
-  const color = d3.scaleLinear()
-    .domain([minTemp, maxTemp])
-    .range([d3.interpolateWarm(0),d3.interpolateWarm(1)])
-  return <svg width="100%" viewBox={`0 0 ${elementWidth} ${elementHeight}`}>
-    <g>
-      <rect stroke='#32393F' width={elementWidth - margin * 2} height={elementHeight - marginTop * 2} fill="none"  y={marginTop} x={margin}/>
-      {temperature.map((t, i) => (
-        <rect
-          key={i}
-          height={scale(t) - margin}
-          rx={3}
-          width={barWidth}
-          x={margin + (elementWidth - margin * 2) / (length / i)}
-          y={elementHeight - scale(t)}
-          fill={color(t)}
-          stroke="none" />
-      ))}
-    </g>
-    <g Left Side Legend>
-			{[-40,-30,-20,-10,0,10,20,30,40,50].sort((a,b)=>b-a).map((a,i) =>{
-
-				const spaceAvailable = elementHeight - 60;
-				const spacing = spaceAvailable / 10;
-
-				return <g >
-					<text style={{fontStyle:"italic",fontSize : fontSize * (9 / 11)}} textAnchor="end" letterSpacing="1" x={margin -10} y={36 + marginTop + spacing * i} fill="darkgray">{a}</text>	
-				</g>
-				
-			})}
-		</g>
-  </svg>
-}
 
 function App() {
 
@@ -180,6 +74,7 @@ function App() {
             <TabPanel value={value} index={1}>
               <PrecipitationChart precipitation={data[0].coordinates[0].dates.map(d => d.value)}/>
             </TabPanel>
+            {/* TODO: Add more panels! */}
             {/* <TabPanel value={value} index={2}>
               Wind
             </TabPanel> */}
@@ -221,5 +116,4 @@ function App() {
 }
 
 export default App
-
-import cities from '../lib/cities copy.json' 
+ 
