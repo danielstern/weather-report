@@ -56,3 +56,11 @@ Meteomatics has CORS disabled - so you can't query it from the front end. To fix
 
 #### Interacting with the Charts
 On PC, it seems very intuitive to hover over a bar to get more information. But on mobile, it's much less intuitive, as there is no hover, and also the space is limited. To get around this and to save time, we've omitted interacting with the chart elements until scope is better defined
+
+## About the UX/UI
+For any sort of basic component, like a date select, we went with the default offered by Material UI. In addition to being highly cost and time effective, it's always a good idea to use the industry standard. If this was a real project and we hired a few junior devs, they would only need to ramp up on Material UI itself in order to begin maintaining the app.
+
+## Directory Structure
+All important files are contained in the `/src` directory and will be familiar to any users of Vite.
+
+For the tables, we went with simplicicity and ease of use. We avoided unecessary decorations, focusing instead on a sense of gestalt. White space is employed generously.
