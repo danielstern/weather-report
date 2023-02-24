@@ -1,10 +1,13 @@
 # Weather Report!
+
+![image](https://user-images.githubusercontent.com/4268152/221254520-482839d9-1c32-477b-9ae1-e2eb93df2d55.png)
+
 ## A React Application Created with Vite That Displays Weather Charts
 
 ## Usage
 1. Clone the repository
 ```
----
+git clone https://github.com/danielstern/weather-report.git
 ```
 
 2. Install dependencies
