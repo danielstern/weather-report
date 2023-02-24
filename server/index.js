@@ -29,7 +29,7 @@ async function fetchMeteomaticsData({
   long = `52.520551`, 
   lat = `13.461804`,
 }) {
-  if (specMode) return spec
+  // if (specMode) return spec
   try {
     const query = `https://api.meteomatics.com/${from}--${to}:PT1H/t_2m:C,wind_speed_10m:ms,precip_1h:mm/${long},${lat}/json`
     console.table({query})
