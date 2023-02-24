@@ -9,7 +9,7 @@
     "preview": "vite preview",
     "server": "node server",
     "app": "npx http-server dist",
-    "start": "npm-run-all --parallel server app"
+    "start": "npm-run-all --parallel app"
   },
   "dependencies": {
     "@date-io/moment": "^2.16.1",

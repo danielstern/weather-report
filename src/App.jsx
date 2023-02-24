@@ -40,7 +40,7 @@ function TabPanel(props) {
 }
 
 
-const fetchMeteomaticsData = async (options) => await axios.post(`http://localhost:7777/`, options)
+const fetchMeteomaticsData = async (options) => await axios.post(`https://meteorics-api-wrapper.herokuapp.com/`, options)
 
 const PrecipitationChart = ({
   precipitation,
