@@ -1,6 +1,6 @@
 # Weather Report!
 
-https://github.com/danielstern/weather-report.git
+## https://master.djv39yyvzpo35.amplifyapp.com/
 
 ![image](https://user-images.githubusercontent.com/4268152/221254520-482839d9-1c32-477b-9ae1-e2eb93df2d55.png)
 
