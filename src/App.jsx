@@ -14,11 +14,10 @@ import { TabPanel } from './mui/TabPanel'
 import { TemperatureBarChart, PrecipitationChart } from './Charts'
 import { fetchMeteomaticsData } from './network';
 
-
+/** The copy of cities contains only cities we know work with Meteomatics (See Readme) */
 import cities from '../lib/cities copy.json'
 import './App.css'
 import '@fontsource/roboto/300.css'
-
 
 function App() {
 
@@ -27,7 +26,6 @@ function App() {
   const [long, setLong] = useState(cities[0].longitude)
   const [lat, setLat] = useState(cities[0].latitude)
   const [data, setData] = useState(null)
-  console.info(data)
   
   const [value, setValue] = useState(0);
 
@@ -54,7 +52,7 @@ function App() {
     return <svg height="100" width="100" fill="dark gray"></svg>
   }
 
-  const minDate = moment().subtract(12, 'hours').toDate()
+  const minDate = moment().subtract(7, 'days').toDate()
 
   return (
     <LocalizationProvider dateAdapter={AdapterMoment}>
@@ -74,7 +72,7 @@ function App() {
             <TabPanel value={value} index={1}>
               <PrecipitationChart precipitation={data[0].coordinates[0].dates.map(d => d.value)}/>
             </TabPanel>
-            {/* TODO: Add more panels! */}
+            {/* TODO: Add more panels one day! */}
             {/* <TabPanel value={value} index={2}>
               Wind
             </TabPanel> */}
