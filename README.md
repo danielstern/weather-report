@@ -35,6 +35,8 @@ It consists of two views (temperature and precipitation) and 3 form controls, us
 ## Deployment
 The front end of the app is deployed to AWS via Amplify. It is linked to this GitHub and redeploys automatically whenever the Master branch is updated!
 
+![image](https://user-images.githubusercontent.com/4268152/221255855-e4199fc1-49e3-4f50-93f9-11926e1ba282.png)
+
 ### Achievements
 #### First Ever AWS Deploy
 Even though I have quite a bit of experience with Azure and even GCP, I've never deployed an app to AWS. This is my first and I'm happy to say it was successful!
